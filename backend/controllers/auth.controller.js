@@ -7,7 +7,7 @@ export const signupUser = async(req,res)=>{
 
     try {
 const {fullName,username,password,confirmPassword,gender}= req.body;
-    if(password != confirmPassword){
+    if(password !== confirmPassword){
         return res.status(400).json({error: "the password does not match"});
     }
     const user = await User.findOne({username});
@@ -20,10 +20,8 @@ const {fullName,username,password,confirmPassword,gender}= req.body;
 
 
     //random avater
-    const malePic = "https://xsgames.co/randomusers/avatar.php?g=male";
-    const femalePic = "https://xsgames.co/randomusers/avatar.php?g=female";
-   
-
+    const malePic = `https://avatar.iran.liara.run/public/boy?username=${username}`;
+    const femalePic = `https://avatar.iran.liara.run/public/girl?username=${username}`;
     //making an obeject to be inserted in the User table 
     const newUser = new User({
         fullName : fullName,
@@ -60,31 +58,37 @@ const {fullName,username,password,confirmPassword,gender}= req.body;
     
 }
 
-export const loginUser = async (req,res)=>{
+export const loginUser = async (req, res) => {
     try {
-       const {username,password} =  req.body;
-       const user  = await User.findOne({username}); // find the entry in the user modle or table with username .
-       const isPasswordCorrect = bcrypt.compare(password,user?.password || "");
-       if(!user || !isPasswordCorrect){
-        res.status(400).json({error : "Invalid password or username"});
-       }
-       generateToken(user._id,res);
-
-       // if every thing went well 
-       res.status(200).json({
-        _id : user._id,
-        fullName : user.fullName,
-        gender : user.gender,
+      const { username, password } = req.body;
+      const user = await User.findOne({ username });
+  
+      if (!user) {
+        return res.status(400).json({ error: "Invalid username" });
+      }
+  
+      const isPasswordCorrect = await bcrypt.compare(password, user.password);
+      if (!isPasswordCorrect) {
+        return res.status(400).json({ error: "Invalid password" });
+      }
+  
+      // Set the token in cookies using generateToken
+      generateToken(user._id, res);
+  
+      // Send the user details as the response
+      return res.status(200).json({
+        _id: user._id,
+        fullName: user.fullName,
+        gender: user.gender,
         profilePic: user.profilePic
-       })
-
+      });
     } catch (error) {
-        console.log(error , "error in the login controler");
-        res.status(500).json({
-            error: "Internal server Error"
-        })
+      console.log("Error in the login controller:", error.message);
+      return res.status(500).json({
+        error: "Internal server error"
+      });
     }
-}
+  };
 
 export const logoutUser = (req,res)=>{
     try {
