@@ -1,17 +1,19 @@
 import React from 'react';
 import useConversation from '../../zustand/useConversation';
+import { useSocketContext } from '../../context/SocketContext.jsx';
 
 const Conversation = ({ conversation, emoji, lastIdx }) => {
   const { selectedConversation, setSelectedConversation } = useConversation();
   const isSelected = conversation._id === selectedConversation?._id;
-
+  const {onlineUsers } = useSocketContext();
+  const isOnline = onlineUsers.includes(conversation._id);
   return (
     <>
       <div className={`flex gap-2 p-2 items-center py-1 rounded hover:bg-sky-500 cursor-pointer ${isSelected ? "bg-sky-500" : ""}`}
         onClick={() => { setSelectedConversation(conversation) }}
       >
         {/* Simplified avatar component */}
-        <div className="avatar online">
+        <div className= {` avatar ${isOnline ? "online" : "offline"}`} >
           <div className="w-12 rounded-full">
             <img src={conversation.profilePic} alt={`${conversation.fullName}'s avatar`} />
           </div>

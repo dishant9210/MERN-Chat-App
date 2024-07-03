@@ -24,11 +24,7 @@ const useGetMessages = () => {
                 if (data.error) {
                     throw new Error(data.error);
                 }
-
-                console.log("from the usegetMessage hook",data)
-                console.log("API response:", data);
                 setMessages(data);
-                console.log("Messages after setting state:", messages);
             } catch (error) {
                 toast.error(error.message);
                 console.log("Error fetching messages:", error); // Log the error

@@ -6,9 +6,7 @@ import messageRoutes from "./routes/message.route.js"
 import userRoutes from "./routes/users.routes.js"
 import connectToMongoDB from "./db/connectingToMongoDB.js";
 import cors from "cors";
-
-//variables//app intialisation
-const app = express();
+import {httpServer,app } from "./socket/socket.js"
 
 dotenv.config();//to be able to use process.env 
 
@@ -40,7 +38,7 @@ app.get("/", (req,res)=>{
 
 
 
-app.listen(PORT, ()=>{
+httpServer.listen(PORT, ()=>{
     connectToMongoDB();
-    console.log(`the server is running at port ${PORT}`);
+    console.log(`the httpServer is running at port ${PORT}`);
 })
