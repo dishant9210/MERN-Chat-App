@@ -7,7 +7,8 @@ import userRoutes from "./routes/users.routes.js"
 import connectToMongoDB from "./db/connectingToMongoDB.js";
 import cors from "cors";
 import {httpServer,app } from "./socket/socket.js"
-
+import path  from 'path'
+ 
 dotenv.config();//to be able to use process.env 
 
 const PORT = process.env.PORT|| 8000;
@@ -21,17 +22,19 @@ app.use(cors({
     credentials: true
 }));//to allow cross origin domain requestes
 
+const __dirname = path.resolve();
+
 
 app.use("/api/auth/",authRoutes);//for all the auth routes
 app.use("/api/messages/",messageRoutes);//for all the message routes
 app.use("/api/user/",userRoutes)// to get the user for the side bar
 
+app.use(express.static(path.join(__dirname,"/frontend/dist")))
 
 
 
-app.get("/", (req,res)=>{
-    //root route
-    res.send("hello world");
+app.get("*", (req,res)=>{
+    res.sendFile(path.join(__dirname,"frontend","dist", "index.html"))
 })
 
 
