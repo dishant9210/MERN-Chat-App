@@ -18,7 +18,7 @@ const PORT = process.env.PORT|| 8000;
 app.use(express.json());// to parse the incoming requests with json payload
 app.use(cookieParser());// to parse the incoming cookie for verification
 app.use(cors({
-    origin: 'http://localhost:3000', // Replace with your frontend's URL
+    origin: 'https://mern-chat-app-kohv.onrender.com', // Replace with your frontend's URL
     credentials: true
 }));//to allow cross origin domain requestes
 
