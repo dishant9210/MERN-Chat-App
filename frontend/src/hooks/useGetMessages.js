@@ -9,6 +9,7 @@ const useGetMessages = () => {
 
     useEffect(() => {
         const getMessages = async () => {
+            const url = process.env.URL;
             const id = selectedConversation?._id;
             if (!id) {
                 console.log("No selected conversation ID");
@@ -18,7 +19,7 @@ const useGetMessages = () => {
             setLoading(true);
             try {
                 axios.defaults.withCredentials = true;
-                const res = await axios.get(`http://localhost:5000/api/messages/${id}`);
+                const res = await axios.get(`${url}/api/messages/${id}`);
                 const data = await res.data;
 
                 if (data.error) {

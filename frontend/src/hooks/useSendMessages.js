@@ -8,6 +8,7 @@ const useSendMessages = () => {
   const { messages, setMessages, selectedConversation } = useConversation();
 
   const sendMessage = async (message) => {
+    const url = process.env.URL;
     setLoading(true);
     const id = selectedConversation?._id;
     if (!id) {
@@ -18,7 +19,7 @@ const useSendMessages = () => {
   
     try {
       axios.defaults.withCredentials = true;
-      const res = await axios.post(`http://localhost:5000/api/messages/send/${id}`, { message }); // Send message as an object
+      const res = await axios.post(`${url}/api/messages/send/${id}`, { message }); // Send message as an object
       const data = res.data;
       if (data.error) {
         throw new Error(data.error);

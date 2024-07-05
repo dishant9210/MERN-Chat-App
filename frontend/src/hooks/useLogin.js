@@ -6,12 +6,13 @@ import { useAuthContext } from '../context/AuthContext';
 const useLogin = () => {
   const [loading, setLoading] = useState(false);
   const { setAuthUser } = useAuthContext();
+  const url = process.env.URL;
 
   const login = async (formData) => {
     setLoading(true);
     try {
       axios.defaults.withCredentials = true;
-      const res = await axios.post("http://localhost:5000/api/auth/login", formData);
+      const res = await axios.post(url,"/api/auth/login", formData);
       const data = res.data;
 
       if (data.error) {

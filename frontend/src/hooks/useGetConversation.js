@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 
 
 const useGetCoversation = () => {
+  const url = process.env.URL;
     const [loading, setLoading] = useState(false);
     const [conversations, setConversations] = useState([]);
   
@@ -15,7 +16,7 @@ const useGetCoversation = () => {
   
         try {
           axios.defaults.withCredentials = true;
-          const res = await axios.get(`http://localhost:5000/api/user/`);
+          const res = await axios.get(`${url}/api/user/`);
           const data = res.data;
           if (data.error) {
             throw new Error(data.error);

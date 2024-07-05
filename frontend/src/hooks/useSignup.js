@@ -8,6 +8,7 @@ const useSignup = () => {
   const {setAuthUser} = useAuthContext();
 
   const signup = async (formData) => {
+    const url = process.env.URL;
     const success = handleErrors(formData);
     if (!success) return;
 
@@ -15,7 +16,7 @@ const useSignup = () => {
 
     try {
       axios.defaults.withCredentials = true;
-      const res = await axios.post('http://localhost:5000/api/auth/signup', formData); // Use HTTP
+      const res = await axios.post(url,'/api/auth/signup', formData); // Use HTTP
       const data = res.data;
       console.log(data);
       //local storage

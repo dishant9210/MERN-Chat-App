@@ -6,11 +6,11 @@ import { useAuthContext } from '../context/AuthContext';
 const useLogout = () => {
   const { setAuthUser } = useAuthContext(); // Correct the typo
   const [loading, setLoading] = useState(false);
-
+  const url = process.env.URL;
   const logout = async () => {
     setLoading(true);
     try {
-      await axios.post("http://localhost:5000/api/auth/logout");
+      await axios.post(url,"/api/auth/logout");
       localStorage.removeItem("chat-user"); // Consistent localStorage key
       setAuthUser(null);
       toast.success("Logged out successfully");
