@@ -19,7 +19,7 @@ const useGetMessages = () => {
             setLoading(true);
             try {
                 axios.defaults.withCredentials = true;
-                const res = await axios.get(`${url}/api/messages/${id}`);
+                const res = await axios.get(`/api/messages/${id}`);
                 const data = await res.data;
 
                 if (data.error) {

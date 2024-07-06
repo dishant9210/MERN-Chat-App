@@ -12,7 +12,7 @@ const useLogin = () => {
     setLoading(true);
     try {
       axios.defaults.withCredentials = true;
-      const res = await axios.post(url,"/api/auth/login", formData);
+      const res = await axios.post("/api/auth/login", formData);
       const data = res.data;
 
       if (data.error) {

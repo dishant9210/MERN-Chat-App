@@ -10,7 +10,7 @@ const useLogout = () => {
   const logout = async () => {
     setLoading(true);
     try {
-      await axios.post(url,"/api/auth/logout");
+      await axios.post("/api/auth/logout");
       localStorage.removeItem("chat-user"); // Consistent localStorage key
       setAuthUser(null);
       toast.success("Logged out successfully");

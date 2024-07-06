@@ -16,7 +16,7 @@ const useSignup = () => {
 
     try {
       axios.defaults.withCredentials = true;
-      const res = await axios.post(url,'/api/auth/signup', formData); // Use HTTP
+      const res = await axios.post('/api/auth/signup', formData); // Use HTTP
       const data = res.data;
       console.log(data);
       //local storage

@@ -16,7 +16,7 @@ const useGetCoversation = () => {
   
         try {
           axios.defaults.withCredentials = true;
-          const res = await axios.get(`${url}/api/user/`);
+          const res = await axios.get(`/api/user/`);
           const data = res.data;
           if (data.error) {
             throw new Error(data.error);
