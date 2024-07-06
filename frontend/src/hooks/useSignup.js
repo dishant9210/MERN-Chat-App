@@ -8,7 +8,7 @@ const useSignup = () => {
   const {setAuthUser} = useAuthContext();
 
   const signup = async (formData) => {
-    const url = process.env.URL;
+    const url = import.meta.env.VITE_API_URL;
     const success = handleErrors(formData);
     if (!success) return;
 

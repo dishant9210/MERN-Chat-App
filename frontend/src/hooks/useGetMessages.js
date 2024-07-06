@@ -6,10 +6,10 @@ import axios from 'axios';
 const useGetMessages = () => {
     const [loading, setLoading] = useState(false);
     const { messages, setMessages, selectedConversation } = useConversation();
-
+    const url = import.meta.env.VITE_API_URL;
     useEffect(() => {
         const getMessages = async () => {
-            const url = process.env.URL;
+            
             const id = selectedConversation?._id;
             if (!id) {
                 console.log("No selected conversation ID");

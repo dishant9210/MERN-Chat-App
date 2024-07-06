@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 
 
 const useGetCoversation = () => {
-  const url = process.env.URL;
+  const url = import.meta.env.VITE_API_URL;
     const [loading, setLoading] = useState(false);
     const [conversations, setConversations] = useState([]);
   

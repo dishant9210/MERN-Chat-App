@@ -6,7 +6,7 @@ import { useAuthContext } from '../context/AuthContext';
 const useLogin = () => {
   const [loading, setLoading] = useState(false);
   const { setAuthUser } = useAuthContext();
-  const url = process.env.URL;
+  const url = import.meta.env.VITE_API_URL;
 
   const login = async (formData) => {
     setLoading(true);

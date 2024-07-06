@@ -6,7 +6,7 @@ import { useAuthContext } from '../context/AuthContext';
 const useLogout = () => {
   const { setAuthUser } = useAuthContext(); // Correct the typo
   const [loading, setLoading] = useState(false);
-  const url = process.env.URL;
+  const url = import.meta.env.VITE_API_URL;
   const logout = async () => {
     setLoading(true);
     try {

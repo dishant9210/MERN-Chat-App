@@ -8,7 +8,7 @@ const useSendMessages = () => {
   const { messages, setMessages, selectedConversation } = useConversation();
 
   const sendMessage = async (message) => {
-    const url = process.env.URL;
+    const url = import.meta.env.VITE_API_URL;
     setLoading(true);
     const id = selectedConversation?._id;
     if (!id) {
