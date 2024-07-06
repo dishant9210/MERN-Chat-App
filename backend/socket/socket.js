@@ -1,12 +1,12 @@
 import { Server } from "socket.io";
 import http from "http";
 import express from "express";
-
+const url = process.env.VITE_API_URL
 const app = express();
 const httpServer = http.createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: ["https://mern-chat-app-kohv.onrender.com"],
+    origin: [url],
     methods: ["GET", "POST"],
   },
 });
