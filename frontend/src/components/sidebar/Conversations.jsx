@@ -9,7 +9,7 @@ const Conversations = () => {
 
   return (
     <div className='flex py-2 flex-col overflow-auto'>
-      {conversations.map((conversation, idx) => (
+      {conversations?.map((conversation, idx) => (
         <Conversation 
           key={conversation._id}
           conversation = {conversation}

@@ -9,7 +9,7 @@ export const useSocketContext = ()=>{
 }
 
 export const SocketContextProvider = ({ children }) => {
-  const url = process.env.VITE_API_URL
+  const url = import.meta.env.VITE_API_URL
   const [socket, setSocket] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
   const { authUser } = useAuthContext();
